@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ebookOrderDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="bookOrderTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cusIdFk" Type="int" Nullable="false" />
+    <Property Name="orderDate" Type="date" Nullable="false" />
+    <Property Name="deliveryDate" Type="date" Nullable="false" />
+    <Property Name="totalAmount" Type="int" Nullable="false" />
+    <Property Name="orderStatusIdFk" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bookTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bookTypeIdFk" Type="int" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="imageUrl" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bookTypeTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="available" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="storeLocation" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="customerPaymentTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cusIdFk" Type="int" Nullable="false" />
+    <Property Name="bookOrderIdFk" Type="int" Nullable="false" />
+    <Property Name="totalAmount" Type="float" />
+    <Property Name="date" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="customerTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cusName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cusEmail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cusAddress" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cusPhone" Type="int" Nullable="false" />
+    <Property Name="cusUsername" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cusPassword" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="feedbackTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rating" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="comment" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="bookOrderIdFk" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="orderDetailsTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bookIdFk" Type="int" Nullable="false" />
+    <Property Name="bookOrderIdFk" Type="int" Nullable="false" />
+    <Property Name="qty" Type="float" />
+    <Property Name="price" Type="float" />
+    <Property Name="totalAmount" Type="float" />
+  </EntityType>
+  <EntityType Name="orderStatusTable">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="statusName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="userTable">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="150" />
+    <Property Name="username" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="350" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_bookOrderTable_customerTable">
+    <End Role="customerTable" Type="Self.customerTable" Multiplicity="1" />
+    <End Role="bookOrderTable" Type="Self.bookOrderTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customerTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="bookOrderTable">
+        <PropertyRef Name="cusIdFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bookOrderTable_orderStatusTable">
+    <End Role="orderStatusTable" Type="Self.orderStatusTable" Multiplicity="1" />
+    <End Role="bookOrderTable" Type="Self.bookOrderTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="orderStatusTable">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bookOrderTable">
+        <PropertyRef Name="orderStatusIdFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bookTable_bookTypeTable">
+    <End Role="bookTypeTable" Type="Self.bookTypeTable" Multiplicity="1" />
+    <End Role="bookTable" Type="Self.bookTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bookTypeTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="bookTable">
+        <PropertyRef Name="bookTypeIdFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_customerPaymentTable_bookOrderTable">
+    <End Role="bookOrderTable" Type="Self.bookOrderTable" Multiplicity="1" />
+    <End Role="customerPaymentTable" Type="Self.customerPaymentTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bookOrderTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="customerPaymentTable">
+        <PropertyRef Name="bookOrderIdFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_customerPaymentTable_customerTable">
+    <End Role="customerTable" Type="Self.customerTable" Multiplicity="1" />
+    <End Role="customerPaymentTable" Type="Self.customerPaymentTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customerTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="customerPaymentTable">
+        <PropertyRef Name="cusIdFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_feedbackTable_bookOrderTable">
+    <End Role="bookOrderTable" Type="Self.bookOrderTable" Multiplicity="1" />
+    <End Role="feedbackTable" Type="Self.feedbackTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bookOrderTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="feedbackTable">
+        <PropertyRef Name="bookOrderIdFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orderDetailsTable_bookOrderTable">
+    <End Role="bookOrderTable" Type="Self.bookOrderTable" Multiplicity="1" />
+    <End Role="orderDetailsTable" Type="Self.orderDetailsTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bookOrderTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="orderDetailsTable">
+        <PropertyRef Name="bookOrderIdFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orderDetailsTable_bookTable">
+    <End Role="bookTable" Type="Self.bookTable" Multiplicity="1" />
+    <End Role="orderDetailsTable" Type="Self.orderDetailsTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bookTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="orderDetailsTable">
+        <PropertyRef Name="bookIdFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ebookOrderDBModelStoreContainer">
+    <EntitySet Name="bookOrderTable" EntityType="Self.bookOrderTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="bookTable" EntityType="Self.bookTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="bookTypeTable" EntityType="Self.bookTypeTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customerPaymentTable" EntityType="Self.customerPaymentTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customerTable" EntityType="Self.customerTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="feedbackTable" EntityType="Self.feedbackTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orderDetailsTable" EntityType="Self.orderDetailsTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orderStatusTable" EntityType="Self.orderStatusTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="userTable" EntityType="Self.userTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_bookOrderTable_customerTable" Association="Self.FK_bookOrderTable_customerTable">
+      <End Role="customerTable" EntitySet="customerTable" />
+      <End Role="bookOrderTable" EntitySet="bookOrderTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bookOrderTable_orderStatusTable" Association="Self.FK_bookOrderTable_orderStatusTable">
+      <End Role="orderStatusTable" EntitySet="orderStatusTable" />
+      <End Role="bookOrderTable" EntitySet="bookOrderTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bookTable_bookTypeTable" Association="Self.FK_bookTable_bookTypeTable">
+      <End Role="bookTypeTable" EntitySet="bookTypeTable" />
+      <End Role="bookTable" EntitySet="bookTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_customerPaymentTable_bookOrderTable" Association="Self.FK_customerPaymentTable_bookOrderTable">
+      <End Role="bookOrderTable" EntitySet="bookOrderTable" />
+      <End Role="customerPaymentTable" EntitySet="customerPaymentTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_customerPaymentTable_customerTable" Association="Self.FK_customerPaymentTable_customerTable">
+      <End Role="customerTable" EntitySet="customerTable" />
+      <End Role="customerPaymentTable" EntitySet="customerPaymentTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_feedbackTable_bookOrderTable" Association="Self.FK_feedbackTable_bookOrderTable">
+      <End Role="bookOrderTable" EntitySet="bookOrderTable" />
+      <End Role="feedbackTable" EntitySet="feedbackTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orderDetailsTable_bookOrderTable" Association="Self.FK_orderDetailsTable_bookOrderTable">
+      <End Role="bookOrderTable" EntitySet="bookOrderTable" />
+      <End Role="orderDetailsTable" EntitySet="orderDetailsTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orderDetailsTable_bookTable" Association="Self.FK_orderDetailsTable_bookTable">
+      <End Role="bookTable" EntitySet="bookTable" />
+      <End Role="orderDetailsTable" EntitySet="orderDetailsTable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,136 @@
+﻿@model IEnumerable<EBookPvt.Models.customerTable>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<style>
+
+    .sidebar {
+        height: 100%; /* Make sidebar full height */
+        width: 200px; /* Set sidebar width */
+        position: fixed; /* Fixed position */
+        top: 150px; /* Position from the top */
+        left: 0; /* Position from the left */
+        background-color: #61882F; /* Background color */
+        padding-top: 20px; /* Add some padding at the top */
+        overflow-y: auto; /* Allow vertical scrolling if content exceeds height */
+    }
+
+        .sidebar a {
+            padding: 15px 20px; /* Padding for links */
+            text-decoration: none; /* Remove underline */
+            font-size: 18px; /* Font size */
+            color: white; /* Text color */
+            display: block; /* Display as block to take full width */
+        }
+
+            .sidebar a:hover {
+                background-color: #E6EE27; /* Background color on hover */
+            }
+
+    .search-box {
+        position: absolute; /* Position absolute to move it to the top right */
+        right: 20px; /* Position from the right */
+        top: 20px; /* Position from the top */
+    }
+
+        .search-box input[type="text"] {
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .search-box input[type="submit"] {
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: #61882F; /* Button color */
+            color: white; /* Text color */
+            border: none; /* Remove border */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+            .search-box input[type="submit"]:hover {
+                background-color: #E6EE27; /* Button color on hover */
+            }
+</style>
+
+<div class="search-box">
+    <form action="@Url.Action("Index", "adminDashboard")" method="get">
+        <input type="text" name="search" placeholder="Search by email..." />
+        <input type="submit" value="Search" />
+    </form>
+</div>
+
+<h2 style="align-content: center; justify-content:center; padding-left:350px;">E-Book Admin Dashboard</h2>
+<h5>E-Book Customer Details</h5>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cusName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cusEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cusAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cusPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cusUsername)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cusPassword)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cusEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cusAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cusPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cusUsername)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cusPassword)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Register New Customer", "Create")
+</p>
+<h5>Current Book Stock In E-Book</h5>
+</br>
+<img src="~/book1.png" style="height: 200px; margin-right: 10px" ;>
+<img src="~/book2.jpg" style="height: 200px; margin-right: 10px" ;>
+<img src="~/book3.jpg" style="height: 200px; margin-right: 10px" ;>
+<img src="~/book4.png" style="height: 200px; margin-right: 10px" ;>
+
+<div class="sidebar" />
+<a href="@Url.Action("Index", "book")">Manage Book Details</a>
+<a href="@Url.Action("Create", "book")">Manage Book Types</a>
+<a href="@Url.Action("Index", "bookOrder")">Manage Order</a>
+<a href="@Url.Action("Index", "customer")">Manage Customer Details</a>
+<a href="@Url.Action("Index", "user")">Manage Accounts</a>
+<a href="@Url.Action("Index", "adminDashboard")">Back To Dashboard</a>
+</div>

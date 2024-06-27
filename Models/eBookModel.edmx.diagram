@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b2a8c8850af24ebab2460afa29516842" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="ebookOrderDBModel.bookOrderTable" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ebookOrderDBModel.bookTable" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ebookOrderDBModel.bookTypeTable" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ebookOrderDBModel.customerPaymentTable" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ebookOrderDBModel.customerTable" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ebookOrderDBModel.feedbackTable" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ebookOrderDBModel.orderDetailsTable" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ebookOrderDBModel.orderStatusTable" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ebookOrderDBModel.userTable" Width="1.5" PointX="7.75" PointY="8.375" IsExpanded="true" />
+        <AssociationConnector Association="ebookOrderDBModel.FK_bookOrderTable_customerTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ebookOrderDBModel.FK_bookOrderTable_orderStatusTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ebookOrderDBModel.FK_customerPaymentTable_bookOrderTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ebookOrderDBModel.FK_feedbackTable_bookOrderTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ebookOrderDBModel.FK_orderDetailsTable_bookOrderTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ebookOrderDBModel.FK_bookTable_bookTypeTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ebookOrderDBModel.FK_orderDetailsTable_bookTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ebookOrderDBModel.FK_customerPaymentTable_customerTable" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

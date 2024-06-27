@@ -1,0 +1,104 @@
+﻿@model IEnumerable<EBookPvt.Models.bookTable>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .sidebar {
+        height: 100%; /* Make sidebar full height */
+        width: 200px; /* Set sidebar width */
+        position: fixed; /* Fixed position */
+        top: 150px; /* Position from the top */
+        left: 0; /* Position from the left */
+        background-color: #61882F; /* Background color */
+        padding-top: 20px; /* Add some padding at the top */
+        overflow-y: auto; /* Allow vertical scrolling if content exceeds height */
+    }
+
+        .sidebar a {
+            padding: 15px 20px; /* Padding for links */
+            text-decoration: none; /* Remove underline */
+            font-size: 18px; /* Font size */
+            color: white; /* Text color */
+            display: block; /* Display as block to take full width */
+        }
+
+            .sidebar a:hover {
+                background-color: #E6EE27; /* Background color on hover */
+            }
+</style>
+<h2>Book Details Management</h2>
+@*@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}*@
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+<p>
+    @Html.ActionLink("Upload New Book", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imageUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bookTypeTable.name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.imageUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bookTypeTable.name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+
+</br>
+<img src="~/book1.png" style="height: 200px; margin-right: 10px" ;>
+<img src="~/book2.jpg" style="height: 200px; margin-right: 10px" ;>
+<img src="~/book3.jpg" style="height: 200px; margin-right: 10px" ;>
+<img src="~/book4.png" style="height: 200px; margin-right: 10px" ;>
+<div class="sidebar" />
+<a href="@Url.Action("Index", "book")">Manage Book Details</a>
+<a href="@Url.Action("Create", "book")">Manage Book Types</a>
+<a href="@Url.Action("Index", "bookOrder")">Manage Order</a>
+<a href="@Url.Action("Index", "customer")">Manage Customer Details</a>
+<a href="@Url.Action("Index", "user")">Manage Accounts</a>
+<a href="@Url.Action("Index", "adminDashboard")">Back To Dashboard</a>
+</div>
+

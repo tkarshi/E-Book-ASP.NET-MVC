@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ebookOrderDBModelStoreContainer" CdmEntityContainer="ebookOrderDBEntities">
+    <EntitySetMapping Name="bookOrderTables">
+      <EntityTypeMapping TypeName="ebookOrderDBModel.bookOrderTable">
+        <MappingFragment StoreEntitySet="bookOrderTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="cusIdFk" ColumnName="cusIdFk" />
+          <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+          <ScalarProperty Name="deliveryDate" ColumnName="deliveryDate" />
+          <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+          <ScalarProperty Name="orderStatusIdFk" ColumnName="orderStatusIdFk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bookTables">
+      <EntityTypeMapping TypeName="ebookOrderDBModel.bookTable">
+        <MappingFragment StoreEntitySet="bookTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="bookTypeIdFk" ColumnName="bookTypeIdFk" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bookTypeTables">
+      <EntityTypeMapping TypeName="ebookOrderDBModel.bookTypeTable">
+        <MappingFragment StoreEntitySet="bookTypeTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="available" ColumnName="available" />
+          <ScalarProperty Name="storeLocation" ColumnName="storeLocation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customerPaymentTables">
+      <EntityTypeMapping TypeName="ebookOrderDBModel.customerPaymentTable">
+        <MappingFragment StoreEntitySet="customerPaymentTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="cusIdFk" ColumnName="cusIdFk" />
+          <ScalarProperty Name="bookOrderIdFk" ColumnName="bookOrderIdFk" />
+          <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customerTables">
+      <EntityTypeMapping TypeName="ebookOrderDBModel.customerTable">
+        <MappingFragment StoreEntitySet="customerTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="cusName" ColumnName="cusName" />
+          <ScalarProperty Name="cusEmail" ColumnName="cusEmail" />
+          <ScalarProperty Name="cusAddress" ColumnName="cusAddress" />
+          <ScalarProperty Name="cusPhone" ColumnName="cusPhone" />
+          <ScalarProperty Name="cusUsername" ColumnName="cusUsername" />
+          <ScalarProperty Name="cusPassword" ColumnName="cusPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="feedbackTables">
+      <EntityTypeMapping TypeName="ebookOrderDBModel.feedbackTable">
+        <MappingFragment StoreEntitySet="feedbackTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="bookOrderIdFk" ColumnName="bookOrderIdFk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderDetailsTables">
+      <EntityTypeMapping TypeName="ebookOrderDBModel.orderDetailsTable">
+        <MappingFragment StoreEntitySet="orderDetailsTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="bookIdFk" ColumnName="bookIdFk" />
+          <ScalarProperty Name="bookOrderIdFk" ColumnName="bookOrderIdFk" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderStatusTables">
+      <EntityTypeMapping TypeName="ebookOrderDBModel.orderStatusTable">
+        <MappingFragment StoreEntitySet="orderStatusTable">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="statusName" ColumnName="statusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userTables">
+      <EntityTypeMapping TypeName="ebookOrderDBModel.userTable">
+        <MappingFragment StoreEntitySet="userTable">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

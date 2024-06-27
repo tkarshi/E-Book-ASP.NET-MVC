@@ -1,0 +1,100 @@
+﻿
+
+#slideout {
+  background: #f5f5f5;
+  color: #333;
+  position: fixed;
+  top: 100px;
+  left: -300px;
+  width: 300px;
+  z-index:9999;
+    border: 1px solid #ccc;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+#slideout .box-colors ul{
+  padding:0;
+}
+
+#slideout .box-colors, #slideout .box-footer{padding:20px;}
+
+#slideout .box-colors ul li{
+  padding:20px;
+  list-style-type:none;
+  display:inline-block;
+  position:relative;
+}
+
+#slideout .box-colors ul li i{
+    color:#fff;
+    font-size:14px;
+    text-align:center;
+    display:none;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 11px;
+    bottom: 0;
+    vertical-align: middle;
+}
+#slideout .box-colors ul li.active i{display:block;}
+
+#slideout h3{
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+#slideout .box-colors ul li:hover{cursor:pointer;}
+
+#slideout .box-colors ul li.cl-default{
+  background:#6f9a37;
+}
+
+#slideout .box-colors ul li.cl-red{
+  background:#bc1615;
+}
+
+#slideout .box-colors ul li.cl-orange{
+  background:#fabc02;
+}
+
+#slideout .box-colors ul li.cl-violet{
+  background:#6a1eeb;
+}
+
+#slideout .box-colors ul li.cl-blue{
+  background:#2163c6;
+}
+
+#slideout .box-colors ul li.cl-brown{
+  background:#88724d;
+}
+
+#slideout.on {
+  left: 0;
+}
+.btn.setting-bt {
+    border-radius: 0px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    float: right;
+    z-index: 9999;
+    right: -56px;
+    position: absolute;
+    border: 1px solid #333;
+    font-size: 30px;
+    background:#222;
+}
+
+/*Footer*/
+
+md-radio-button{
+    font-weight: 600;
+    text-transform: uppercase;
+}
+

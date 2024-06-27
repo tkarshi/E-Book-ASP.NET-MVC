@@ -1,0 +1,291 @@
+﻿@model IEnumerable<EBookPvt.Models.bookTable>
+
+@{
+    ViewBag.Title = "Books";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .sidebar {
+        height: 100%; /* Make sidebar full height */
+        width: 200px; /* Set sidebar width */
+        position: fixed; /* Fixed position */
+        top: 150px; /* Position from the top */
+        left: 0; /* Position from the left */
+        background-color: #61882F; /* Background color */
+        padding-top: 20px; /* Add some padding at the top */
+        overflow-y: auto; /* Allow vertical scrolling if content exceeds height */
+    }
+
+        .sidebar a {
+            padding: 15px 20px; /* Padding for links */
+            text-decoration: none; /* Remove underline */
+            font-size: 18px; /* Font size */
+            color: white; /* Text color */
+            display: block; /* Display as block to take full width */
+        }
+
+            .sidebar a:hover {
+                background-color: #E6EE27; /* Background color on hover */
+            }
+
+    .search-box {
+        position: absolute; /* Position absolute to move it to the top right */
+        right: 20px; /* Position from the right */
+        top: 20px; /* Position from the top */
+    }
+
+        .search-box input[type="text"] {
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .search-box input[type="submit"] {
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: #61882F; /* Button color */
+            color: white; /* Text color */
+            border: none; /* Remove border */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+            .search-box input[type="submit"]:hover {
+                background-color: #E6EE27; /* Button color on hover */
+            }
+
+    .cart-quantity {
+        display: flex;
+        align-items: center;
+    }
+
+        .cart-quantity button {
+            padding: 5px;
+            font-size: 14px;
+            margin: 0 5px;
+            background-color: #61882F; /* Button color */
+            color: white; /* Text color */
+            border: none; /* Remove border */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+            .cart-quantity button:hover {
+                background-color: #61882F; /* Button color on hover */
+            }
+
+        .cart-quantity input[type="text"] {
+            width: 50px;
+            text-align: center;
+            font-size: 14px;
+            border: 1px solid #ccc;
+        }
+
+    .cart-view {
+        position: fixed;
+        right: 150px;
+        top: 100px;
+        width: 300px;
+        background-color: #EEF36F;
+        border: 1px solid #61882F;
+        padding: 20px;
+        display: none;
+        box-shadow: 0 4px 8px rgba(97, 136, 47, 0.5);
+    }
+
+        .cart-view h3 {
+            margin-top: 0;
+        }
+
+        .cart-view table {
+            width: 100%;
+        }
+
+        .cart-view table, .cart-view th, .cart-view td {
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+            padding: 8px;
+            text-align: left;
+        }
+
+    button {
+        background-color: #61882F;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+        /* Hover styles for View Cart button */
+        button#viewCart:hover {
+            background-color: #E6EE27;
+        }
+
+        /* Hover styles for Add to Cart button */
+        button.addToCart:hover {
+            background-color: #E6EE27;
+        }
+</style>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<h2>Books</h2>
+
+<div class="search-box">
+    <form action="@Url.Action("Index", "CustomerDashboard")" method="get">
+        <input type="text" name="search" placeholder="Search books..." />
+        <input type="submit" value="Search" />
+    </form>
+</div>
+
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+<img src="~/book1.png" style="height: 200px; margin-right: 10px" ;>
+<img src="~/book2.jpg" style="height: 200px; margin-right: 10px" ;>
+<img src="~/book3.jpg" style="height: 200px; margin-right: 10px" ;>
+<img src="~/book4.png" style="height: 200px; margin-right: 10px" ;>
+</br>
+</br>
+
+<button id="viewCart" onclick="toggleCartView()">View Cart</button>
+<div class="cart-view" id="cartView">
+    <h4>Cart</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="cartItems">
+        </tbody>
+    </table>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imageUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bookTypeTable.name)
+        </th>
+        <th>
+            Add to Cart
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.imageUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bookTypeTable.name)
+            </td>
+            <td>
+                <div class="cart-quantity">
+                    <button type="button" onclick="decreaseQuantity(@item.Id)">-</button>
+                    <input type="text" id="quantity-@item.Id" value="1" readonly />
+                    <button type="button" onclick="increaseQuantity(@item.Id)">+</button>
+                </div>
+            </td>
+            <td>
+                <button id="addToCart" onclick="addToCart(@item.Id, '@item.title')">Add to Cart</button>
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                <a href="@Url.Action("create", "bookOrder")">Order Book</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="sidebar" />
+<a href="@Url.Action("Index", "CustomerDashboard")">Book Details</a>
+<a href="@Url.Action("Create", "bookOrder")">Order Book</a>
+<a href="@Url.Action("Index", "orderDetails")">Manage Order</a>
+<a href="@Url.Action("Index", "customer")">Account Details</a>
+<a href="@Url.Action("Index", "feedback")">Feedback</a>
+</div>
+
+<script>
+    let cart = [];
+
+    function decreaseQuantity(bookId) {
+        const quantityInput = document.getElementById('quantity-' + bookId);
+        let quantity = parseInt(quantityInput.value);
+        if (quantity > 1) {
+            quantityInput.value = quantity - 1;
+        }
+    }
+
+    function increaseQuantity(bookId) {
+        const quantityInput = document.getElementById('quantity-' + bookId);
+        let quantity = parseInt(quantityInput.value);
+        quantityInput.value = quantity + 1;
+    }
+
+    function addToCart(bookId, title) {
+        const quantityInput = document.getElementById('quantity-' + bookId);
+        const quantity = parseInt(quantityInput.value);
+        const existingItem = cart.find(item => item.bookId === bookId);
+
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            cart.push({ bookId, title, quantity });
+        }
+
+        updateCartView();
+    }
+
+    function updateCartView() {
+        const cartItemsContainer = document.getElementById('cartItems');
+        cartItemsContainer.innerHTML = '';
+
+        cart.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.title}</td>
+                <td>${item.quantity}</td>
+                <td><button onclick="removeFromCart(${item.bookId})">Remove</button></td>
+            `;
+            cartItemsContainer.appendChild(row);
+        });
+    }
+
+    function removeFromCart(bookId) {
+        cart = cart.filter(item => item.bookId !== bookId);
+        updateCartView();
+    }
+
+    function toggleCartView() {
+        const cartView = document.getElementById('cartView');
+        cartView.style.display = cartView.style.display === 'block' ? 'none' : 'block';
+    }
+</script>

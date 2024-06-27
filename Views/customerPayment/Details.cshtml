@@ -1,0 +1,51 @@
+﻿@model EBookPvt.Models.customerPaymentTable
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>customerPaymentTable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.totalAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bookOrderTable.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bookOrderTable.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customerTable.cusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customerTable.cusName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
