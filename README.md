@@ -5,10 +5,12 @@ The aim of the system is to build a stable, expandable, and user-friendly platfo
 Configuring the ASP.net MVC Application.
 -	Clone the Repository: Clone the application's source code repository from the version control system (e.g., GitHub).
 -	Open the Project: Open the project solution file (.sln) in Visual Studio
+  
 Database Connection Configuration.
 -	Configure Connection Strings: 
 -	- Open the appsettings.json file in the project.
 - - Add the connection string for the database.
+    
 Configuring Authentication.
 -	Identity Configuration:
 - -	Configure ASP.NET Identity for user authentication and authorization.
